@@ -1,0 +1,23 @@
+- name: check routing daemon
+  shell: bash -c '[[ -z $(vtysh -f {{ routing_conf[routing_daemon] }} --dryrun) ]]'
+
+- name: restart routing daemon
+  service: name={{ routing_daemon }} state=restarted
+
+- name: reload routing daemon
+  service: name={{ routing_daemon }} state=reloaded
+
+- name: clear bgp in
+  shell: vtysh -c 'clear ip bgp * soft in'
+
+- name: clear bgp out
+  shell: vtysh -c 'clear ip bgp * soft out'
+
+- name: clear ipv6 bgp in
+  shell: vtysh -c 'clear bgp ipv6 * soft in'
+
+- name: clear ipv6 bgp out
+  shell: vtysh -c 'clear bgp ipv6 * soft out'
+
+- name: reload system-daemon
+  systemd: daemon_reload=yes

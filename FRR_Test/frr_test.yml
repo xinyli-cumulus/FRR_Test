@@ -1,0 +1,8 @@
+---
+- hosts: leaf04
+  become: yes
+  become_user: root
+  roles:
+    - bgp
+
+...

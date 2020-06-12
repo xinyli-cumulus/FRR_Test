@@ -1,0 +1,15 @@
+- name: configure frr daemons file
+  copy: src=daemons dest=/etc/frr/daemons
+  notify:
+    - check routing daemon
+    - restart routing daemon
+
+- name: configure frr configuration
+  copy: src=frr.conf dest=/etc/frr/frr.conf
+  notify:
+    - check routing daemon
+    - reload routing daemon
+    - clear bgp in
+    - clear bgp out
+    - clear ipv6 bgp in
+    - clear ipv6 bgp out
