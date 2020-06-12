@@ -2,10 +2,10 @@
   shell: bash -c '[[ -z $(vtysh -f /etc/frr/frr.conf --dryrun) ]]'
 
 - name: restart routing daemon
-  service: name={{ routing_daemon }} state=restarted
+  service: name=frr state=restarted
 
 - name: reload routing daemon
-  service: name={{ routing_daemon }} state=reloaded
+  service: name=frr state=reloaded
 
 - name: clear bgp in
   shell: vtysh -c 'clear ip bgp * soft in'
