@@ -1,5 +1,5 @@
 - name: check routing daemon
-  shell: bash -c '[[ -z $(vtysh -f {{ routing_conf[routing_daemon] }} --dryrun) ]]'
+  shell: bash -c '[[ -z $(vtysh -f /etc/frr/frr.conf --dryrun) ]]'
 
 - name: restart routing daemon
   service: name={{ routing_daemon }} state=restarted
